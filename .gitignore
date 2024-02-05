@@ -109,3 +109,4 @@
 /build/intermediates/ktLint/runKtlintCheckOverKotlinScripts_errors.bin
 /build/intermediates/ktLint/runKtlintFormatOverKotlinScripts_errors.bin
 /.gradle/8.2/checksums/sha1-checksums.bin
+/.idea/modules/app/Earth_One_Super_App.app.iml
