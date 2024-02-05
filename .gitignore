@@ -101,3 +101,11 @@
 /.gradle/8.2/dependencies-accessors/b55b7af2b19dfa31c7640c0927ffcb6c123e51f7/classes/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.class
 /.gradle/8.2/dependencies-accessors/b0a0c91f669ec17599858d31c49ee4962e7eb2a2/sources/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.java
 /.gradle/8.2/dependencies-accessors/b55b7af2b19dfa31c7640c0927ffcb6c123e51f7/sources/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.java
+/build/reports/ktlint/ktlintKotlinScriptCheck/ktlintKotlinScriptCheck.txt
+/build/reports/ktlint/ktlintKotlinScriptFormat/ktlintKotlinScriptFormat.txt
+/.gradle/8.2/checksums/md5-checksums.bin
+/build/intermediates/ktLint/reporterProviders.bin
+/build/intermediates/ktLint/reporters.bin
+/build/intermediates/ktLint/runKtlintCheckOverKotlinScripts_errors.bin
+/build/intermediates/ktLint/runKtlintFormatOverKotlinScripts_errors.bin
+/.gradle/8.2/checksums/sha1-checksums.bin
