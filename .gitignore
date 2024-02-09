@@ -110,3 +110,4 @@
 /build/intermediates/ktLint/runKtlintFormatOverKotlinScripts_errors.bin
 /.gradle/8.2/checksums/sha1-checksums.bin
 /.idea/modules/app/Earth_One_Super_App.app.iml
+/.gradle/8.2/dependencies-accessors/9250720409fda2a77438c75a0774390163a05ca2/classes/org/gradle/accessors/dm/LibrariesForLibs$ActivityLibraryAccessors.class
