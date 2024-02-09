@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Earth One Super App"
 include(":app")
+include(":core:network")
