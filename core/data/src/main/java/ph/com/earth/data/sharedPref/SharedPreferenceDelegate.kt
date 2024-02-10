@@ -8,33 +8,47 @@ val SharedPreferences.delegates get() = SharedPreferenceDelegates(this)
 
 class SharedPreferenceDelegates(private val prefs: SharedPreferences) {
     fun boolean(default: Boolean = false, key: String? = null): ReadWriteProperty<Any, Boolean> =
-        create(default = default, getter = prefs::getBoolean, setter = prefs.edit()::putBoolean)
+        create(
+            default = default,
+            key = key,
+            getter = prefs::getBoolean,
+            setter = prefs.edit()::putBoolean
+        )
 
     fun float(default: Float = 0.0f, key: String? = null): ReadWriteProperty<Any, Float> =
-        create(default = default, getter = prefs::getFloat, setter = prefs.edit()::putFloat)
+        create(
+            default = default,
+            key = key,
+            getter = prefs::getFloat,
+            setter = prefs.edit()::putFloat
+        )
 
     fun long(default: Long = 0L, key: String? = null): ReadWriteProperty<Any, Long> =
-        create(default = default, getter = prefs::getLong, setter = prefs.edit()::putLong)
+        create(
+            default = default,
+            key = key,
+            getter = prefs::getLong,
+            setter = prefs.edit()::putLong
+        )
 
     fun int(default: Int = 0, key: String? = null): ReadWriteProperty<Any, Int> =
-        create(default = default, getter = prefs::getInt, setter = prefs.edit()::putInt)
+        create(default = default, key = key, getter = prefs::getInt, setter = prefs.edit()::putInt)
 
     fun string(default: String = "", key: String? = null): ReadWriteProperty<Any, String> =
         create(
             default = default,
-            getter = { k, d -> prefs.getString(k, d) as String },
+            key = key, getter = { k, d -> prefs.getString(k, d) as String },
             setter = prefs.edit()::putString
         )
 
     fun stringSet(
         default: Set<String> = emptySet(),
         key: String? = null,
-    ): ReadWriteProperty<Any, Set<String>> =
-        create(
-            default = default,
-            getter = { k, d -> prefs.getStringSet(k, d) as Set<String> },
-            setter = prefs.edit()::putStringSet
-        )
+    ): ReadWriteProperty<Any, Set<String>> = create(
+        default = default,
+        key = key, getter = { k, d -> prefs.getStringSet(k, d) as Set<String> },
+        setter = prefs.edit()::putStringSet
+    )
 
 
     private fun <T : Any> create(
