@@ -1,4 +1,4 @@
-package ph.com.earth.data.sharedPref
+package ph.com.earth.data.cache.sharedPref
 
 import android.content.SharedPreferences
 import kotlin.properties.ReadWriteProperty
@@ -37,7 +37,8 @@ class SharedPreferenceDelegates(private val prefs: SharedPreferences) {
     fun string(default: String = "", key: String? = null): ReadWriteProperty<Any, String> =
         create(
             default = default,
-            key = key, getter = { k, d -> prefs.getString(k, d) as String },
+            key = key,
+            getter = { k, d -> prefs.getString(k, d) as String },
             setter = prefs.edit()::putString
         )
 
@@ -46,7 +47,8 @@ class SharedPreferenceDelegates(private val prefs: SharedPreferences) {
         key: String? = null,
     ): ReadWriteProperty<Any, Set<String>> = create(
         default = default,
-        key = key, getter = { k, d -> prefs.getStringSet(k, d) as Set<String> },
+        key = key,
+        getter = { k, d -> prefs.getStringSet(k, d) as Set<String> },
         setter = prefs.edit()::putStringSet
     )
 

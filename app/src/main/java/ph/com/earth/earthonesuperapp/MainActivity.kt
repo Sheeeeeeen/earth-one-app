@@ -11,38 +11,38 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ph.com.earth.data.MySharedPrefsManager
 import ph.com.earth.data.UserRepository
 import ph.com.earth.earthonesuperapp.ui.theme.EarthOneSuperAppTheme
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModels(factoryProducer = {
-        val prefs = MySharedPrefsManager.create(this)
-        val userRepo = UserRepository(prefs)
-        MainViewModelModelFactory(
-            userRepository = userRepo
-        )
-    })
+    private val viewModel: MainViewModel by viewModels(
+        factoryProducer = {
+            val dataStore = MySharedPrefsManager.createDatastore(this)
+            val userRepo = UserRepository(dataStore)
+            MainViewModelModelFactory(userRepository = userRepo)
+        }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
-
-            val uiState = viewModel.uiState.collectAsState()
-
             EarthOneSuperAppTheme {
+                val uiState by viewModel.uiState.collectAsState()
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(name = "Android", isTurboMode = uiState.value) {
-                        viewModel.changeTurboMode(uiState.value.not())
+                    Greeting(name = "Android", isTurboMode = uiState) {
+                        viewModel.changeTurboMode(uiState.not())
                     }
                 }
             }
@@ -62,7 +62,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(
     modifier: Modifier = Modifier,
     name: String,
-    isTurboMode: Boolean = false,
+    isTurboMode: Boolean,
     onClick: () -> Unit = {},
 ) {
     val mesg = if (isTurboMode)
@@ -81,6 +81,6 @@ fun Greeting(
 @Composable
 fun GreetingPreview() {
     EarthOneSuperAppTheme {
-        Greeting(name = "Android")
+        Greeting(name = "Android", isTurboMode = false)
     }
 }
