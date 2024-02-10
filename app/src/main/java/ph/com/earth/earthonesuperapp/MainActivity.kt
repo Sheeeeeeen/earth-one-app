@@ -14,21 +14,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import ph.com.earth.data.MySharedPrefsManager
-import ph.com.earth.data.UserRepository
+import dagger.hilt.android.AndroidEntryPoint
 import ph.com.earth.earthonesuperapp.ui.theme.EarthOneSuperAppTheme
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainViewModel by viewModels(
-        factoryProducer = {
-            val dataStore = MySharedPrefsManager.createDatastore(this)
-            val userRepo = UserRepository(dataStore)
-            MainViewModelModelFactory(userRepository = userRepo)
-        }
-    )
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,14 +38,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
-        }
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    inner class MainViewModelModelFactory(val userRepository: UserRepository) :
-        ViewModelProvider.NewInstanceFactory() {
-        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return MainViewModel(userRepository = userRepository) as T
         }
     }
 }
