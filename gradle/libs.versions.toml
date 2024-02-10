@@ -11,6 +11,7 @@ compose-bom = "2024.02.00"
 org-jetbrains-kotlin-jvm = "1.9.22"
 appcompat = "1.6.1"
 material = "1.11.0"
+datastore-preferences = "1.1.0-beta01"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -29,6 +30,7 @@ ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 material3 = { group = "androidx.compose.material3", name = "material3" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore-preferences" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
