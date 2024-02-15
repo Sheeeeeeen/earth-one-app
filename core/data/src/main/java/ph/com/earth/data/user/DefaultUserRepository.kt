@@ -1,4 +1,4 @@
-package ph.com.earth.data
+package ph.com.earth.data.user
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -8,10 +8,12 @@ import ph.com.earth.data.cache.datastore.DatastoreDelegates.Companion.IS_USER_LO
 import ph.com.earth.data.cache.datastore.delegate
 import javax.inject.Inject
 
-class UserRepository @Inject constructor(private val dataStore: DataStore<Preferences>) {
+class DefaultUserRepository @Inject constructor(private val dataStore: DataStore<Preferences>) :
+    UserRepository {
 
-    val isUserLoggedIn: Flow<Boolean> by dataStore.delegate.boolean()
-    suspend fun cacheUserIsLoggedIn(isLogin: Boolean) {
+    override val isUserLoggedIn: Flow<Boolean> by dataStore.delegate.boolean()
+
+    override suspend fun cacheUserIsLoggedIn(isLogin: Boolean) {
         dataStore.edit { pref ->
             pref[IS_USER_LOGIN_KEY] = isLogin
         }

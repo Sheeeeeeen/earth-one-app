@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.EarthOneSuperApp" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.EarthOneSuperApp" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.EarthOneSuperApp.Parent</item>
+    </style>
+
+    <style name="Theme.EarthOneSuperApp.Parent" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="windowSplashScreenBackground">@color/white</item>
+    </style>
+
 </resources>
