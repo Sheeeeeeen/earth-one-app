@@ -7,26 +7,22 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import ph.com.earth.data.UserRepository
+import ph.com.earth.data.user.UserRepository
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
 
-    private val _uiState: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(MainUiState())
     val uiState = _uiState.asStateFlow()
 
-    init {
+    fun observeUserLoggedInStatus() {
         viewModelScope.launch {
-            userRepository.isUserLoggedIn.collect { loginStatus ->
-                _uiState.update { loginStatus }
+            userRepository.isUserLoggedIn.collect { status ->
+                _uiState.update { it.copy(isLoading = status) }
             }
         }
     }
-
-    fun changeTurboMode(mode: Boolean) {
-        viewModelScope.launch {
-            userRepository.cacheUserIsLoggedIn(isLogin = mode)
-        }
-    }
 }
+
+data class MainUiState(val isLoading: Boolean = true)
