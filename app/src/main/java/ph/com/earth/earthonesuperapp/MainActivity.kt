@@ -15,7 +15,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import ph.com.earth.earthonesuperapp.ui.theme.EarthOneSuperAppTheme
 
 @AndroidEntryPoint
@@ -27,12 +29,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         val splashScreen = installSplashScreen()
 
-        splashScreen.setKeepOnScreenCondition { true }
+        lifecycleScope.launch {
+            viewModel.uiState.collect {
+                splashScreen.setKeepOnScreenCondition { it.isLoading }
+            }
+        }
 
         setContent {
             EarthOneSuperAppTheme {
                 val uiState by viewModel.uiState.collectAsState()
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
