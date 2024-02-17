@@ -1,7 +1,7 @@
 package ph.com.earth.earthonesuperapp
 
-import app.cash.turbine.test
 import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.verify
 import junit.framework.TestCase.assertEquals
@@ -68,5 +68,26 @@ class MainViewModelTest {
         val expectedValue = MainUiState(isLoading = false)
         assertEquals(expectedValue, mainViewModel.uiState.value)
         verify { userRepository.isUserLoggedIn }
+    }
+
+    @Test
+    fun `test login`() = runTest {
+        //Arrange
+        val userLoggedInFlow = MutableStateFlow(true)
+        coEvery { userRepository.isUserLoggedIn } returns userLoggedInFlow
+        coEvery { userRepository.cacheUserLoggedInStatus(isLogin = true) } returns Unit
+
+        //Action
+        mainViewModel = MainViewModel(userRepository)
+        mainViewModel.login()
+        runCurrent()
+
+        //Assert
+        assertEquals(
+            MainUiState(isLoading = false, startDestination = "home"),
+            mainViewModel.uiState.value
+        )
+        verify { userRepository.isUserLoggedIn }
+        coVerify { userRepository.cacheUserLoggedInStatus(isLogin = true) }
     }
 }

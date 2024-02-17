@@ -42,8 +42,8 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting(name = "Android", isTurboMode = true) {
-
+                    Greeting(name = "${uiState.startDestination}", isTurboMode = false) {
+                        viewModel.login()
                     }
                 }
             }
