@@ -17,3 +17,5 @@ rootProject.name = "Earth One Super App"
 include(":app")
 include(":core:network")
 include(":core:data")
+include(":feature")
+include(":feature:user")
