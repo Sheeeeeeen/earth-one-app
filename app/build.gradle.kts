@@ -56,6 +56,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:data"))
+
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)
     implementation(libs.activity.compose)
@@ -64,10 +66,7 @@ dependencies {
     implementation(libs.ui.graphics)
     implementation(libs.ui.tooling.preview)
     implementation(libs.material3)
-    implementation(project(":core:data"))
-    implementation(libs.androidx.core.splashscreen)
-    implementation(libs.androidx.navigation.runtime.ktx)
-    implementation(libs.androidx.navigation.compose)
+
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
@@ -88,4 +87,11 @@ dependencies {
     //unit test
     testImplementation(libs.junit)
     testImplementation(libs.mockk)
+
+    //splash screen
+    implementation(libs.androidx.core.splashscreen)
+    
+    //navigation compose
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
 }
