@@ -66,6 +66,8 @@ dependencies {
     implementation(libs.material3)
     implementation(project(":core:data"))
     implementation(libs.androidx.core.splashscreen)
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
     testImplementation(libs.kotlinx.coroutines.test)
