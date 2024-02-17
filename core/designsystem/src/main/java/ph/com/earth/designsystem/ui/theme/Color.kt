@@ -1,4 +1,4 @@
-package ph.com.earth.earthonesuperapp.ui.theme
+package ph.com.earth.designsystem.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

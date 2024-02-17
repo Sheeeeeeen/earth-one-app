@@ -10,7 +10,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import ph.com.earth.earthonesuperapp.ui.theme.EarthOneSuperAppTheme
+import ph.com.earth.designsystem.ui.theme.EarthOneSuperAppTheme
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

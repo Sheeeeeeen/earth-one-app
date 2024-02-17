@@ -1,4 +1,4 @@
-package ph.com.earth.earthonesuperapp.ui.theme
+package ph.com.earth.designsystem.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

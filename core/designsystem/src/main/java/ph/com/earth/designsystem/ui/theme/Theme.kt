@@ -1,9 +1,10 @@
-package ph.com.earth.earthonesuperapp.ui.theme
+package ph.com.earth.designsystem.ui.theme
 
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -42,7 +43,7 @@ fun EarthOneSuperAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
@@ -67,4 +68,13 @@ fun EarthOneSuperAppTheme(
         typography = Typography,
         content = content
     )
+}
+
+@Composable
+fun AppPreview(content: @Composable () -> Unit) {
+    EarthOneSuperAppTheme {
+        Surface(color = MaterialTheme.colorScheme.background) {
+            content()
+        }
+    }
 }

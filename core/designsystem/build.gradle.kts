@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "ph.com.earth.user"
+    namespace = "ph.com.earth.designsystem"
     compileSdk = 34
 
     defaultConfig {
@@ -41,8 +41,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core:designsystem"))
-
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
@@ -60,4 +58,6 @@ dependencies {
 
     //compose navigation
     implementation(libs.bundles.feature.dependency)
+
+    debugImplementation(libs.ui.test.manifest)
 }
