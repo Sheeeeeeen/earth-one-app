@@ -19,10 +19,16 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
     init {
         viewModelScope.launch {
             userRepository.isUserLoggedIn.collect { status ->
-                _uiState.update { it.copy(isLoading = false) }
+                val currentDestination = if (status) "home" else null
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        startDestination = currentDestination
+                    )
+                }
             }
         }
     }
 }
 
-data class MainUiState(val isLoading: Boolean = true)
+data class MainUiState(val isLoading: Boolean = true, val startDestination: String? = null)

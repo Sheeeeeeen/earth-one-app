@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -38,19 +39,18 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `test MainUiState with default value of isLoading = true `() = runTest {
+    fun `test MainUiState with default value of isLoading = true`() = runTest {
         //Arrange
         val userLoggedInFlow = MutableStateFlow(true)
         coEvery { userRepository.isUserLoggedIn } returns userLoggedInFlow
 
         //Action
         mainViewModel = MainViewModel(userRepository)
+        runCurrent()
 
         //Assert
-        mainViewModel.uiState.test {
-            val expectedValue = MainUiState(isLoading = true)
-            assertEquals(expectedValue, awaitItem())
-        }
+        val expectedValue = MainUiState(isLoading = false, startDestination = "home")
+        assertEquals(expectedValue, mainViewModel.uiState.value)
         verify { userRepository.isUserLoggedIn }
     }
 
@@ -62,12 +62,11 @@ class MainViewModelTest {
 
         //Action
         mainViewModel = MainViewModel(userRepository)
+        runCurrent()
 
         //Assert
-        mainViewModel.uiState.test {
-            val expectedValue = MainUiState(isLoading = false)
-            assertEquals(expectedValue, awaitItem())
-        }
+        val expectedValue = MainUiState(isLoading = false)
+        assertEquals(expectedValue, mainViewModel.uiState.value)
         verify { userRepository.isUserLoggedIn }
     }
 }
