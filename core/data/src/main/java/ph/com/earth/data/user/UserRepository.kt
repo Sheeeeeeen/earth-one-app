@@ -5,6 +5,5 @@ import kotlinx.coroutines.flow.Flow
 interface UserRepository {
 
     val isUserLoggedIn: Flow<Boolean>
-
-    suspend fun cacheUserIsLoggedIn(isLogin: Boolean)
+    suspend fun cacheUserLoggedInStatus(isLogin: Boolean)
 }

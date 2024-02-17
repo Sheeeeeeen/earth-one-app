@@ -16,9 +16,11 @@ class DatastoreDelegates(private val dataStore: DataStore<Preferences>) {
         const val PREFERENCE_USER_SETTING = "userSettings"
     }
 
-    fun boolean(): ReadOnlyProperty<Any, Flow<Boolean>> = ReadOnlyProperty { _, property ->
-        dataStore.data.map {
-            it[IS_USER_LOGIN_KEY] ?: false
-        }
+    fun boolean(
+        default: Boolean = false,
+        key: Preferences.Key<Boolean>? = null,
+    ): ReadOnlyProperty<Any, Flow<Boolean>> = ReadOnlyProperty { _, property ->
+        val prefKey = key ?: booleanPreferencesKey(property.name)
+        dataStore.data.map { it[prefKey] ?: default }
     }
 }

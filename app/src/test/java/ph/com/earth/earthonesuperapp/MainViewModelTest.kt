@@ -10,9 +10,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.advanceTimeBy
 import kotlinx.coroutines.test.resetMain
-import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
 import org.junit.After
@@ -22,9 +20,6 @@ import ph.com.earth.data.user.UserRepository
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModelTest {
-
-//    @get:Rule
-//    val testCoroutineRule = TestCoroutineRule()
 
     private val testCoroutineDispatcher: TestDispatcher = UnconfinedTestDispatcher()
 

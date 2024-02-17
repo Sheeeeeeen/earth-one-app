@@ -7,7 +7,7 @@ class FakeUserRepository: UserRepository {
     override val isUserLoggedIn: Flow<Boolean>
         get() = TODO("Not yet implemented")
 
-    override suspend fun cacheUserIsLoggedIn(isLogin: Boolean) {
+    override suspend fun cacheUserLoggedInStatus(isLogin: Boolean) {
         TODO("Not yet implemented")
     }
 }
