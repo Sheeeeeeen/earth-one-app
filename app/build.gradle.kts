@@ -57,6 +57,7 @@ android {
 dependencies {
 
     implementation(project(":core:data"))
+    implementation(project(":feature:user"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.runtime.ktx)

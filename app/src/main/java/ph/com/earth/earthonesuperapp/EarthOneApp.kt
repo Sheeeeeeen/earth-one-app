@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import ph.com.earth.earthonesuperapp.navigation.EarthOneNavHost
+import ph.com.earth.user.navigation.loginNavigationRoute
 
 @Composable
 fun EarthOneApp(
@@ -15,6 +16,6 @@ fun EarthOneApp(
     EarthOneNavHost(
         modifier = Modifier.fillMaxSize(),
         navController = navController,
-        startDestination = mainUiState.startDestination ?: "login"
+        startDestination = mainUiState.startDestination ?: loginNavigationRoute
     )
 }

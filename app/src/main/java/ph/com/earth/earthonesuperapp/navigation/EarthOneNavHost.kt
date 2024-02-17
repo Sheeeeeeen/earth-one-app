@@ -8,23 +8,20 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ph.com.earth.user.navigation.userGraph
 
 @Composable
 fun EarthOneNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    startDestination: String = "login",
+    startDestination: String = "login-route",
 ) {
     NavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
         startDestination = startDestination,
     ) {
-        composable(route = "login") {
-            Box(modifier = Modifier.fillMaxSize()) {
-                Text(text = "Login")
-            }
-        }
+        userGraph()
         composable(route = "home") {
             Box(modifier = Modifier.fillMaxSize()) {
                 Text(text = "home")
