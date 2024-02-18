@@ -58,5 +58,5 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 
 [bundles]
 feature-dependency = ['androidx-navigation-runtime-ktx', 'androidx-navigation-compose',
-    'androidx-navigation-common-ktx', 'ui-tooling-preview', 'ui-tooling']
-
+    'androidx-navigation-common-ktx', 'ui-tooling-preview']
+feature-dependency-debug = ['ui-tooling', 'ui-test-manifest']

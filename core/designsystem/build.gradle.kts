@@ -10,7 +10,6 @@ android {
 
     defaultConfig {
         minSdk = 21
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -37,6 +36,11 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
 }
 
 dependencies {
@@ -58,6 +62,5 @@ dependencies {
 
     //compose navigation
     implementation(libs.bundles.feature.dependency)
-
-    debugImplementation(libs.ui.test.manifest)
+    debugImplementation(libs.bundles.feature.dependency.debug)
 }

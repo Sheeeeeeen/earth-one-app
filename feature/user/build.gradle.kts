@@ -60,4 +60,5 @@ dependencies {
 
     //compose navigation
     implementation(libs.bundles.feature.dependency)
+    debugImplementation(libs.bundles.feature.dependency.debug)
 }
