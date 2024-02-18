@@ -8,10 +8,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import ph.com.earth.user.navigation.landingNavigationRoute
 import ph.com.earth.user.navigation.navigateToEnterPinScreen
 import ph.com.earth.user.navigation.navigateToLoginScreen
 import ph.com.earth.user.navigation.navigateToSignupScreen
-import ph.com.earth.user.navigation.onBoardingNavigationRoute
 import ph.com.earth.user.navigation.userGraph
 
 @Composable
@@ -23,7 +23,7 @@ fun EarthOneNavHost(
     NavHost(
         modifier = modifier.fillMaxSize(),
         navController = navController,
-        startDestination = startDestination ?: onBoardingNavigationRoute,
+        startDestination = startDestination ?: landingNavigationRoute,
     ) {
         userGraph(
             navigateToHome = { navController.navigate("home") },

@@ -31,9 +31,7 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
     }
 
     fun login() {
-        viewModelScope.launch {
-            userRepository.cacheUserLoggedInStatus(isLogin = true)
-        }
+        viewModelScope.launch { userRepository.cacheUserLoggedInStatus(isLogin = true) }
     }
 }
 

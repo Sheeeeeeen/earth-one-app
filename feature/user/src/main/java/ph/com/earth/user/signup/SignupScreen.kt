@@ -13,7 +13,7 @@ fun SignupScreenRoute() {
 }
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+private fun SignupScreen(modifier: Modifier = Modifier) {
     Box(modifier = modifier.fillMaxSize()) {
         Text(text = "Signup")
     }

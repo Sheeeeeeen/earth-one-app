@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import ph.com.earth.user.landing.LandingScreenRoute
 import ph.com.earth.user.login.LoginScreenRoute
 import ph.com.earth.user.onboarding.OnboardingScreenRoute
 import ph.com.earth.user.pin.EnterPinScreenRoute
@@ -13,6 +14,7 @@ const val loginNavigationRoute = "login-route"
 const val onBoardingNavigationRoute = "on-boarding-route"
 const val enterPinNavigationRoute = "enter-pin-route"
 const val signupNavigationRoute = "signup-route"
+const val landingNavigationRoute = "landing-route"
 
 fun NavGraphBuilder.userGraph(
     navigateToHome: () -> Unit = {},
@@ -30,6 +32,12 @@ fun NavGraphBuilder.userGraph(
     }
     composable(route = enterPinNavigationRoute) { EnterPinScreenRoute(navigateToHome = navigateToHome) }
     composable(route = signupNavigationRoute) { SignupScreenRoute() }
+    composable(route = landingNavigationRoute) {
+        LandingScreenRoute(
+            navigateToLogin = navigateToLogin,
+            navigateToSignup = navigateToSignup
+        )
+    }
     nestedGraphs()
 }
 

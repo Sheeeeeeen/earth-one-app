@@ -16,7 +16,7 @@ fun EnterPinScreenRoute(navigateToHome: () -> Unit) {
 }
 
 @Composable
-fun EnterPinScreen(modifier: Modifier = Modifier, navigateToHome: () -> Unit = {}) {
+private fun EnterPinScreen(modifier: Modifier = Modifier, navigateToHome: () -> Unit = {}) {
     Box(modifier = modifier.fillMaxSize()) {
         OutlinedButton(
             modifier = Modifier.fillMaxWidth().align(alignment = Alignment.Center),

@@ -1,4 +1,4 @@
-package ph.com.earth.user.onboarding
+package ph.com.earth.user.landing
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -9,35 +9,38 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import ph.com.earth.designsystem.ui.theme.AppPreview
 
 @Composable
-fun OnboardingScreenRoute(navigateToLogin: () -> Unit, navigateToSignup: () -> Unit) {
-    OnboardingScreen(navigateToLogin = navigateToLogin, navigateToSignup = navigateToSignup)
+fun LandingScreenRoute(navigateToLogin: () -> Unit, navigateToSignup: () -> Unit) {
+    LandingScreen(navigateToLogin = navigateToLogin, navigateToSignup = navigateToSignup)
 }
 
 @Composable
-private fun OnboardingScreen(
+private fun LandingScreen(
     modifier: Modifier = Modifier,
     navigateToLogin: () -> Unit = {},
     navigateToSignup: () -> Unit = {},
 ) {
     Column(modifier = modifier.fillMaxSize()) {
         Text(
-            text = "Onboarding",
+            text = "Landing",
             modifier = Modifier.fillMaxWidth()
         )
         Spacer(Modifier.fillMaxSize().weight(1f))
         Button(modifier = Modifier.fillMaxWidth(), onClick = navigateToLogin) {
-            Text("Login")
+            Text("Log in")
         }
         Button(modifier = Modifier.fillMaxWidth(), onClick = navigateToSignup) {
-            Text("Signup")
+            Text("Create an account")
         }
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, apiLevel = 33)
 @Composable
-private fun OnboardingScreenPreview() {
-    OnboardingScreen()
+private fun LandingScreenPreview() {
+    AppPreview {
+        LandingScreen()
+    }
 }
