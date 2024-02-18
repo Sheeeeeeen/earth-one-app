@@ -12,11 +12,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(private val userRepository: UserRepository) : ViewModel() {
-    fun login() {
-        viewModelScope.launch {
-            userRepository.cacheUserLoggedInStatus(isLogin = true)
-        }
-    }
 
     private val _uiState: MutableStateFlow<MainUiState> = MutableStateFlow(MainUiState())
     val uiState = _uiState.asStateFlow()
@@ -32,6 +27,12 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
                     )
                 }
             }
+        }
+    }
+
+    fun login() {
+        viewModelScope.launch {
+            userRepository.cacheUserLoggedInStatus(isLogin = true)
         }
     }
 }
