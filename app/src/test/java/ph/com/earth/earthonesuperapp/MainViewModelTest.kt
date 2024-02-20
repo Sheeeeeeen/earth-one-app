@@ -1,5 +1,8 @@
 package ph.com.earth.earthonesuperapp
 
+import arrow.core.Either
+import arrow.core.Option
+import arrow.core.some
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -8,6 +11,7 @@ import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.TestDispatcher
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -18,6 +22,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import ph.com.earth.data.user.UserRepository
+import ph.com.earth.data.user.model.InAppUpdateResult
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModelTest {
@@ -90,4 +95,22 @@ class MainViewModelTest {
         verify { userRepository.isUserLoggedIn }
         coVerify { userRepository.cacheUserLoggedInStatus(isLogin = true) }
     }
+
+    @Test
+    fun `test MainUiState on token request`() = runTest {
+        //Arrange
+        coEvery { userRepository.checkInAppUpdate() } returns InAppUpdateResult.NoUpdate.some()
+        //Action
+
+        mainViewModel = MainViewModel(userRepository)
+        runCurrent()
+
+        //Assert
+        assertEquals(
+            InAppUpdateResult.NoUpdate,
+            mainViewModel.inAppUpdateStatus.first()
+        )
+        coVerify { userRepository.checkInAppUpdate() }
+    }
+
 }
