@@ -17,7 +17,8 @@ fun LoginScreenRoute(navigateToEnterPin: () -> Unit) {
 }
 
 @Composable
-private fun LoginScreen(modifier: Modifier = Modifier, navigateToEnterPin: () -> Unit = {}) {
+private
+fun LoginScreen(modifier: Modifier = Modifier, navigateToEnterPin: () -> Unit = {}) {
     Box(modifier = modifier.fillMaxSize()) {
         Button(
             modifier = Modifier.fillMaxWidth().align(alignment = Alignment.Center),

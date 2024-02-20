@@ -74,7 +74,7 @@ internal fun LandingScreen(
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.background.copy(alpha = 0.5f)
             )
-            Spacer(Modifier.height(40.dp).fillMaxWidth())
+            Spacer(Modifier.height(32.dp).fillMaxWidth())
             CreateAnAccountButton(
                 modifier = Modifier.fillMaxWidth(),
                 onCreateAnAccount = navigateToSignup
@@ -90,7 +90,7 @@ private fun LoginButton(modifier: Modifier = Modifier, onLogin: () -> Unit) {
     TextButton(
         modifier = modifier.fillMaxWidth().height(50.dp),
         onClick = onLogin,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.onBackground,
         ),
@@ -105,7 +105,7 @@ private fun CreateAnAccountButton(modifier: Modifier = Modifier, onCreateAnAccou
     TextButton(
         modifier = modifier.fillMaxWidth().height(50.dp),
         onClick = onCreateAnAccount,
-        shape = MaterialTheme.shapes.extraSmall,
+        shape = MaterialTheme.shapes.small,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary,
         )
