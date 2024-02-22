@@ -1670,3 +1670,14 @@
 /.gradle/8.2/dependencies-accessors/0590787d6968ede137d64993735189a9e4fd4a0b/classes/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock$VersionAccessors.class
 /.gradle/8.2/dependencies-accessors/0590787d6968ede137d64993735189a9e4fd4a0b/classes/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.class
 /.gradle/8.2/dependencies-accessors/0590787d6968ede137d64993735189a9e4fd4a0b/sources/org/gradle/accessors/dm/LibrariesForLibsInPluginsBlock.java
+.idea/.name
+.idea/compiler.xml
+.idea/deploymentTargetDropDown.xml
+.idea/gradle.xml
+.idea/kotlinc.xml
+.idea/migrations.xml
+.idea/misc.xml
+.idea/vcs.xml
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.idea/inspectionProfiles/Project_Default.xml

@@ -34,10 +34,11 @@ class MainViewModel @Inject constructor(private val userRepository: UserReposito
                 }
             }
         }
-        viewModelScope.launch {
-            userRepository.checkInAppUpdate().onSome {
-                _inAppUpdateStatus.emit(it)
-            }
+    }
+
+    suspend fun checkInAppUpdate(){
+        userRepository.checkInAppUpdate().onSome {
+            _inAppUpdateStatus.emit(it)
         }
     }
 

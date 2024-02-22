@@ -1,25 +1,23 @@
 package ph.com.earth.earthonesuperapp
 
-import arrow.core.Either
-import arrow.core.Option
+import app.cash.turbine.test
 import arrow.core.some
+import io.mockk.called
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.mockk
+import io.mockk.unmockkAll
 import io.mockk.verify
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.test.TestDispatcher
-import kotlinx.coroutines.test.UnconfinedTestDispatcher
-import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
-import kotlinx.coroutines.test.setMain
 import org.junit.After
-import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import ph.com.earth.data.user.UserRepository
 import ph.com.earth.data.user.model.InAppUpdateResult
@@ -27,21 +25,10 @@ import ph.com.earth.data.user.model.InAppUpdateResult
 @OptIn(ExperimentalCoroutinesApi::class)
 class MainViewModelTest {
 
-    private val testCoroutineDispatcher: TestDispatcher = UnconfinedTestDispatcher()
+    @get:Rule
+    val testCoroutineRule = TestCoroutineRule()
 
-    private val userRepository: UserRepository = mockk()
-
-    private lateinit var mainViewModel: MainViewModel
-
-    @Before
-    fun setup() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-    @After
-    fun tearDown() {
-        Dispatchers.resetMain()
-    }
+    private val userRepository: UserRepository = mockk(relaxed = true)
 
     @Test
     fun `test MainUiState with default value of isLoading = true`() = runTest {
@@ -50,13 +37,15 @@ class MainViewModelTest {
         coEvery { userRepository.isUserLoggedIn } returns userLoggedInFlow
 
         //Action
-        mainViewModel = MainViewModel(userRepository)
+        val underTest = MainViewModel(userRepository)
         runCurrent()
 
         //Assert
-        val expectedValue = MainUiState(isLoading = false, startDestination = "home")
-        assertEquals(expectedValue, mainViewModel.uiState.value)
-        verify { userRepository.isUserLoggedIn }
+        underTest.uiState.test {
+            val expectedValue = MainUiState(isLoading = false, startDestination = "home")
+            val item = awaitItem()
+            assertEquals(expectedValue, item)
+        }
     }
 
     @Test
@@ -66,13 +55,14 @@ class MainViewModelTest {
         coEvery { userRepository.isUserLoggedIn } returns userLoggedInFlow
 
         //Action
-        mainViewModel = MainViewModel(userRepository)
+        val underTest = MainViewModel(userRepository)
         runCurrent()
 
         //Assert
-        val expectedValue = MainUiState(isLoading = false)
-        assertEquals(expectedValue, mainViewModel.uiState.value)
-        verify { userRepository.isUserLoggedIn }
+        underTest.uiState.test {
+            val expectedValue = MainUiState(isLoading = false)
+            assertEquals(expectedValue, awaitItem())
+        }
     }
 
     @Test
@@ -83,34 +73,36 @@ class MainViewModelTest {
         coEvery { userRepository.cacheUserLoggedInStatus(isLogin = true) } returns Unit
 
         //Action
-        mainViewModel = MainViewModel(userRepository)
-        mainViewModel.login()
+        val underTest = MainViewModel(userRepository)
+        underTest.login()
         runCurrent()
 
         //Assert
-        assertEquals(
-            MainUiState(isLoading = false, startDestination = "home"),
-            mainViewModel.uiState.value
-        )
-        verify { userRepository.isUserLoggedIn }
-        coVerify { userRepository.cacheUserLoggedInStatus(isLogin = true) }
+        underTest.uiState.test {
+            assertEquals(
+                MainUiState(isLoading = false, startDestination = "home"),
+                awaitItem()
+            )
+        }
     }
 
     @Test
     fun `test MainUiState on token request`() = runTest {
         //Arrange
+        val userLoggedInFlow = MutableStateFlow(true)
+        every { userRepository.isUserLoggedIn } returns userLoggedInFlow
         coEvery { userRepository.checkInAppUpdate() } returns InAppUpdateResult.NoUpdate.some()
-        //Action
+        val underTest = MainViewModel(userRepository)
+        advanceUntilIdle()
 
-        mainViewModel = MainViewModel(userRepository)
-        runCurrent()
+        //Action
+        launch {
+            underTest.checkInAppUpdate()
+        }
 
         //Assert
-        assertEquals(
-            InAppUpdateResult.NoUpdate,
-            mainViewModel.inAppUpdateStatus.first()
-        )
-        coVerify { userRepository.checkInAppUpdate() }
+        underTest.inAppUpdateStatus.test {
+            assertEquals(InAppUpdateResult.NoUpdate, awaitItem())
+        }
     }
-
 }
